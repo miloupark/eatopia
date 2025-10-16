@@ -13,12 +13,23 @@ Eatopia = Eat + Utopia
 ✍🏼 좋아하는 맛집을 탐색하고, 저장하며 나만의 취향을 기록해보세요.  
 🍴 한 끼의 식사가 하나의 이야기로 이어지는 공간 - Eatopia에서.
 
+- [Eatopia](#)
+
 <br>
 
-## 🔗 Links
+## 🔍 API Overview
 
-- [Repository](#)
-- [Eatopia](#)
+- [Server](https://github.com/yeah1832/eatingMark-BE)
+- [Swagger](https://oz-coding-school.github.io/FE-pre-project-swagger-ui/)
+
+| Method   | Endpoint             | Description           |
+| -------- | -------------------- | --------------------- |
+| `GET`    | `/places`            | 전체 맛집 데이터 조회 |
+| `GET`    | `/users/places`      | 찜한 맛집 데이터 조회 |
+| `POST`   | `/users/places`      | 찜한 나만의 맛집 추가 |
+| `DELETE` | `/users/places/{id}` | 찜한 나만의 맛집 삭제 |
+
+데이터는 `data/` 폴더의 JSON 파일에서 가져옵니다.
 
 <br>
 
