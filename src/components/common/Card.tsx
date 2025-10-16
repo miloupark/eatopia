@@ -1,28 +1,33 @@
-// 🧩 맛집 카드 Draft
-
-import React from "react";
+// 🧩 맛집 카드
+import { IMAGE_BASE_URL } from "../../api/constants";
 
 type CardProps = {
-  name: string;
-  category: string;
-  rating: number;
-  imageUrl: string;
+  id: string;
+  title: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  description: string;
 };
 
-export default function Card({ name, category, rating, imageUrl }: CardProps) {
+export default function Card({ title, image, description }: CardProps) {
   return (
-    <div className="w-2xs bg-white border border-neutral-400 rounded-2xl overflow-hidden">
+    <div className=" bg-white border border-neutral-400 rounded-2xl overflow-hidden">
       {/* 이미지 sec */}
       <div>
-        <img src={imageUrl} alt={name} className="w-full h-40" />
+        <img
+          src={`${IMAGE_BASE_URL}${image.src}`}
+          alt={`${image.alt}`}
+          className="w-full h-40"
+        />
       </div>
 
       <div className="flex justify-between p-4">
         {/* 정보 sec */}
         <div>
-          <p>{name}</p>
-          <span>{category}</span>
-          <span>{rating.toFixed(1)}</span>
+          <p>{title}</p>
+          <span>{description}</span>
         </div>
 
         {/* 저장 / 기록 / 공유 btns */}
