@@ -76,20 +76,36 @@ Eatopia = Eat + Utopia
 
 ## 🔖 Reference
 
-### 📘 Axios & Error Handling
+📘 Axios & Error Handling
 
 - [Axios 인스턴스](https://axios-http.com/kr/docs/instance)
 - [Axios 에러 핸들링](https://axios-http.com/kr/docs/handling_errors)
 - [Axios GitHub - TypeScript definitions & type guard for axios errors](https://github.com/axios/axios?tab=readme-ov-file#typescript)
 - [stackoverflow - HTTP error status code in Axios](https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios)
 
-### 📗 TypeScript & Type Guard
+📗 TypeScript & Type Guard
 
 - [타입 가드](https://radlohead.gitbook.io/typescript-deep-dive/type-system/typeguard)
 - [타입스크립트에서 Axios Error 처리하기](https://gxxrxn.github.io/axios-error-type-guard/)
 
-### 📙 Network & Error Design
+📙 Network & Error Design
 
 - [Endpoint란?](https://rebornbb.tistory.com/entry/Web-Endpoint%EC%97%90-%EB%8C%80%ED%95%9C-%EC%84%A4%EB%AA%85)
 - [wikidocs - HTTP 상태 코드와 에러 처리, 안정적인 통신 구현하기](https://wikidocs.net/288120)
 - [에러 & 출력 문구 상수화](https://khs20010327.tistory.com/321)
+
+🌍 Geolocation
+
+- [MDN - Geolocation_API](https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#geolocation_%EA%B0%9D%EC%B2%B4)
+- [MDN - GeolocationPositionError](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError?utm_source=chatgpt.com)
+- [[Javascript] Geolocation API 사용하여 현재 위치 가져오기](https://velog.io/@seoyaon/Javascript-Geolocation-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0#1-geolocation-api-%EB%9E%80)
+
+🧭 Distance Sort
+
+- [[React/Typescript] 지도 중심 위치와 가까운 거리순으로 데이터 정렬하기](https://velog.io/@cogito/ReactTypescript-%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%A7%80%EB%8F%84-API-5%ED%8E%B8-%EC%A7%80%EB%8F%84-%EC%A4%91%EC%8B%AC-%EC%9C%84%EC%B9%98%EC%99%80-%EA%B0%80%EA%B9%8C%EC%9A%B4-%EA%B1%B0%EB%A6%AC%EC%88%9C%EC%9C%BC%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EB%A0%AC%ED%95%98%EA%B8%B0-5gcjdmvc)
+- [리액트에서 필터링과 상태 관리의 효율적인 구현 방법](https://f-lab.kr/insight/react-filtering-state-management-20250106)
+
+⚙️ TSConfig / 빌드 설정
+
+- [TSconfig Reference](https://www.typescriptlang.org/tsconfig/)
+- [Typescript 컴파일시 세부설정 - allowJs ](https://codingapple.com/unit/typescript-tsconfig-json/)
