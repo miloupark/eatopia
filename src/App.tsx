@@ -71,8 +71,19 @@ function App() {
         setSortBy("distance");
       },
       (error) => {
-        // ⚠️ GeolocationPositionError 메세지 분기
-        setLocationError("위치를 불러오지 못했습니다.");
+        let message = "";
+
+        if (error.code === error.PERMISSION_DENIED) {
+          message = "위치 접근이 거부되었습니다.";
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+          message = "위치 정보를 사용할 수 없습니다.";
+        } else if (error.code === error.TIMEOUT) {
+          message = "위치 정보를 가져오는데 시간이 초과되었습니다.";
+        } else {
+          message = "알 수 없는 오류가 발생했습니다.";
+        }
+
+        setLocationError(message);
         setSortBy("default");
       },
       {
