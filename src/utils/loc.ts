@@ -22,8 +22,8 @@ function calculateDistance(
   return d;
 }
 
-export function sortPlacesByDistance(
-  places: { lat: number; lon: number }[],
+export function sortPlacesByDistance<T extends { lat: number; lon: number }>(
+  places: T[],
   lat: number,
   lon: number
 ) {
