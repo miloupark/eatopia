@@ -1,20 +1,37 @@
-# 🍽️ Eatopia
+# 🍽️ [Eatopia](https://eatopia-alpha.vercel.app/)
 
-> Find your flavor, your own utopia of taste.  
-> 나만의 맛집을 발견하고 기록하는 React + TypeScript + Vite 기반 웹 서비스입니다.
+> 기본 요구사항은 OZ Coding School에서 제공받았으며,  
+> 본 리포지토리에는 개인적으로 추가/개선한 기능과 학습 기록이 포함됩니다.
+
+Find your flavor, your own utopia of taste.  
+나만의 맛집을 발견하고 기록하는 React + TypeScript + Vite 기반 웹 서비스입니다.
+
+- [Eatopia](https://eatopia-alpha.vercel.app/)
 
 <br>
 
 ## 📖 About Eatopia
 
-Eatopia = Eat + Utopia  
-"누구나 자신만의 맛의 이상향을 찾을 수 있는 곳."
+> Eatopia = Eat + Utopia  
+> "누구나 자신만의 맛의 이상향을 찾을 수 있는 곳."
 
 🗺️ 나만의 맛의 유토피아를 찾아가는 여정을 담은 웹 서비스입니다.  
 ✍🏼 좋아하는 맛집을 탐색하고, 저장하며 나만의 취향을 기록해보세요.  
 🍴 한 끼의 식사가 하나의 이야기로 이어지는 공간 - Eatopia에서.
 
-- [Eatopia](#)
+<br>
+
+## 🧩 Learning Issues
+
+> 개발 중 발생한 주요 이슈와 학습을 기록했습니다.  
+> 상세한 내용은 각 이슈 링크에서 확인할 수 있습니다.
+
+- [💩 시행착오: Express.static() 매핑 경로 이해 부족으로 인한 이미지 404 에러](https://github.com/miloupark/eatopia/issues/2)
+- [🧩 Axios 에러 처리 로직 구현 및 에러 상태 관리](https://github.com/miloupark/eatopia/issues/3)
+- [🧩 로컬 서버 없이 백엔드 데이터를 받아오는 구조](https://github.com/miloupark/eatopia/issues/4)
+- [💩 시행착오: {lat, lon} 타입 축소로 인한 Place 속성 소거 → TS2339 발생](https://github.com/miloupark/eatopia/issues/5)
+
+<br>
 
 <br>
 
@@ -34,19 +51,20 @@ Eatopia = Eat + Utopia
 
 ## 🧩 Tech Stack Overview
 
-| Category     | Stack                        |
-| ------------ | ---------------------------- |
-| Framework    | React (Vite)                 |
-| UI / Styling | Tailwind CSS                 |
-| Icons        | Lucide React                 |
-| Networking   | Axios                        |
-| Deployment   | Vercel / AWS S3 + CloudFront |
+| Category     | Stack        |
+| ------------ | ------------ |
+| Framework    | React (Vite) |
+| UI / Styling | Tailwind CSS |
+| Icons        | Lucide React |
+| Networking   | Axios        |
+| Deployment   | Vercel       |
 
 <br>
 
-## 🌐 API Client
+## 🌐 API Client 구조
 
-- HTTP 클라이언트: Axios
+> HTTP 통신은 Axios 인스턴스로 관리합니다.
+
 - 공통 인스턴스 관리: `src/api/axios.ts`
   - `baseURL` 및 전역 설정 정의
   - 다른 모듈에서 import하여 공통 사용
@@ -71,6 +89,66 @@ Eatopia = Eat + Utopia
   └── App.tsx                # 루트 진입 컴포넌트
 
 ```
+
+<br>
+
+## 🧭 거리 계산 및 정렬 (`utils/loc.ts`)
+
+> 내 위치 기반 거리순 정렬 기능  
+> 사용자 위치와 맛집 간의 거리를 계산하여, 가까운 순으로 정렬합니다.
+
+```ts
+function toRad(value: number): number {
+  return (value * Math.PI) / 180;
+}
+
+function calculateDistance(
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number
+) {
+  const R = 6371; // 지구 반지름(km)
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lng2 - lng1);
+  const l1 = toRad(lat1);
+  const l2 = toRad(lat2);
+
+  // 하버사인 공식
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(l1) * Math.cos(l2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c;
+  return d;
+}
+
+export function sortPlacesByDistance<T extends { lat: number; lon: number }>(
+  places: T[],
+  lat: number,
+  lon: number
+) {
+  const sortedPlaces = [...places];
+  sortedPlaces.sort((a, b) => {
+    const distanceA = calculateDistance(lat, lon, a.lat, a.lon);
+    const distanceB = calculateDistance(lat, lon, b.lat, b.lon);
+    return distanceA - distanceB; // 가까운 순
+  });
+  return sortedPlaces;
+}
+```
+
+### 동작 원리
+
+- `toRad()`
+  - 위도/경도는 보통 `도(degree)` 단위이므로, 삼각함수에 쓰기 위해 라디안으로 변환
+- `calculateDistance()`:
+  - 두 위도/경도 간의 대권거리를 하버사인 공식으로 계산
+  - 지구 반지름 `R=6371(km)`을 기준으로 km 단위 결과 반환
+  - 대부분의 지도 위치 기반 서비스에서 사용하는 표준 거리 계산식
+- `sortPlacesByDistance()`:
+  - 특정 좌표(사용자 위치)를 기준으로 모든 장소의 거리를 계산
+  - 가까운 순서대로 배열을 정렬하여 반환
 
 <br>
 
