@@ -23,16 +23,27 @@ export default function KakaoMap() {
         const container = document.getElementById("map");
         if (!container) return;
 
-        // 지도 옵션 설정
-        const options = {
-          // 중심 좌표
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-          // 확대 레벨 (작을수록 더 확대됨)
-          level: 3,
-        };
+        const fallback = new window.kakao.maps.LatLng(37.5665, 126.978); // 서울시청
+        const map = new window.kakao.maps.Map(container, {
+          center: fallback,
+          level: 5,
+        });
 
-        // 새 카카오 지도 객체 생성 — 여기서 실제 지도가 화면에 렌더링
-        new window.kakao.maps.Map(container, options);
+        // 현재 위치로 이동
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            ({ coords }) => {
+              const here = new window.kakao.maps.LatLng(
+                coords.latitude,
+                coords.longitude
+              );
+              map.setCenter(here);
+              new window.kakao.maps.Marker({ position: here, map });
+            },
+            (err) => console.warn("geolocation 실패:", err),
+            { enableHighAccuracy: true, timeout: 5000 }
+          );
+        }
       });
     };
 
