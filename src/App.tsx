@@ -5,6 +5,7 @@ import Header from "./components/common/Header";
 import MainLayout from "./components/common/MainLayout";
 import { getPlaces, type ApiError, type Place } from "./api/place";
 import { sortPlacesByDistance } from "./utils/loc";
+import KakaoMap from "./components/KakaoMap";
 
 // 타입 가드: ApiError 타입인지 확인
 const isApiError = (error: unknown): error is ApiError => {
@@ -116,6 +117,11 @@ function App() {
     <>
       <Header />
       <MainLayout>
+        {/* Kakao Map */}
+        <section>
+          <KakaoMap />
+        </section>
+
         {/* 맛집 목록 */}
         <section>
           <h2 className="text-center">맛집 목록</h2>

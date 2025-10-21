@@ -44,7 +44,7 @@ Find your flavor, your own utopia of taste.
 | `POST`   | `/users/places`      | 찜한 나만의 맛집 추가 |
 | `DELETE` | `/users/places/{id}` | 찜한 나만의 맛집 삭제 |
 
-- [Backend Repo](https://github.com/yeah1832/eatingMark-BE)
+- [Backend Repo](https://github.com/miloupark/eatopia-BE)
 - [Swagger UI](https://oz-coding-school.github.io/FE-pre-project-swagger-ui/)
 
 <br>
@@ -177,6 +177,13 @@ export function sortPlacesByDistance<T extends { lat: number; lon: number }>(
 - [MDN - Geolocation_API](https://developer.mozilla.org/ko/docs/Web/API/Geolocation_API/Using_the_Geolocation_API#geolocation_%EA%B0%9D%EC%B2%B4)
 - [MDN - GeolocationPositionError](https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError?utm_source=chatgpt.com)
 - [[Javascript] Geolocation API 사용하여 현재 위치 가져오기](https://velog.io/@seoyaon/Javascript-Geolocation-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0#1-geolocation-api-%EB%9E%80)
+
+🗺️ Kakao Map
+
+- [Kakao Maps API](https://apis.map.kakao.com/web/guide/)
+- [KaKao Developers](https://developers.kakao.com/)
+- []()
+- []()
 
 🧭 Distance Sort
 
