@@ -124,7 +124,7 @@ function App() {
       <Header />
       <MainLayout>
         {view === "list" ? (
-          <section>
+          <section className="w-full max-w-100">
             {/* 맛집 / 찜 토글 */}
             <div className="flex justify-center gap-5">
               <button onClick={() => setView("list")}>맛집 목록</button>

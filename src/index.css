@@ -1,1 +1,12 @@
+@import "./styles/fonts.css";
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", system-ui, "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", "Segoe UI", Arial, sans-serif;
+}
+@layer base {
+  html {
+    @apply font-sans;
+  }
+}

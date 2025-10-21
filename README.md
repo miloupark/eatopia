@@ -194,3 +194,7 @@ export function sortPlacesByDistance<T extends { lat: number; lon: number }>(
 
 - [TSconfig Reference](https://www.typescriptlang.org/tsconfig/)
 - [Typescript 컴파일시 세부설정 - allowJs ](https://codingapple.com/unit/typescript-tsconfig-json/)
+
+- [React에서-SVG-컴포넌트로-불러오기](https://fay-story.com/entry/React%EC%97%90%EC%84%9C-SVG-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EB%A1%9C-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0-Vite-TS-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-SVG-%ED%8C%8C%EC%9D%BC-%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0-feat-vite-plugin-svgr#google_vignette)
+
+- [[React] vite + ts에서 vite-plugin-svgr로 svg 사용 설정](https://breathof.tistory.com/311)
