@@ -26,6 +26,9 @@ type UserLocation = {
 // 정렬 옵션 타입
 type SortOption = "default" | "distance";
 
+// 페이지에서 보여줄 맛집 리스트
+type ViewMode = "list" | "saved";
+
 function App() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +40,9 @@ function App() {
 
   // UI 정렬 기준
   const [sortBy, setSortBy] = useState<SortOption>("default");
+
+  const [view, setView] = useState<ViewMode>("list");
+  const [savedPlaces, setSavedPlaces] = useState<Place[]>([]);
 
   // 맛집 데이터 가져오기
   useEffect(() => {
@@ -117,49 +123,55 @@ function App() {
     <>
       <Header />
       <MainLayout>
-        {/* Kakao Map */}
-        <section>
-          <KakaoMap />
-        </section>
-
-        {/* 맛집 목록 */}
-        <section>
-          <h2 className="text-center">맛집 목록</h2>
-
-          {/* 필터링 버튼 */}
-          <div className="flex justify-end">
-            <button onClick={() => handleSortChange("default")}>기본순</button>
-            <button onClick={() => handleSortChange("distance")}>거리순</button>
-          </div>
-
-          {/* 위치 오류 안내 */}
-          {locationError && <p>{locationError}</p>}
-
-          {/* 로딩 상태 */}
-          {loading && <p>🍽️ 맛집을 불러오는 중입니다...</p>}
-
-          {/* 에러 상태 */}
-          {!loading && errorMessage && <p>{errorMessage}</p>}
-
-          {!loading && !errorMessage && sortedPlaces.length > 0 && (
-            <div className="grid grid-cols-4 gap-5 p-10">
-              {sortedPlaces.map((place) => (
-                <Card
-                  id={place.id}
-                  key={place.id}
-                  title={place.title}
-                  image={place.image}
-                  description={place.description}
-                />
-              ))}
+        {view === "list" ? (
+          <section>
+            {/* 맛집 / 찜 토글 */}
+            <div className="flex justify-center gap-5">
+              <button onClick={() => setView("list")}>맛집 목록</button>
+              <button onClick={() => setView("saved")}>찜 목록</button>
             </div>
-          )}
-        </section>
 
-        {/* 찜 맛집 목록 */}
-        <section>
-          <h2 className="text-center">찜 맛집 목록</h2>
-          <p>찜한 맛집이 없습니다.</p>
+            {/* 맛집 정렬 기준 버튼 */}
+            <div className="flex justify-end">
+              <button onClick={() => handleSortChange("default")}>
+                기본순
+              </button>
+              <button onClick={() => handleSortChange("distance")}>
+                거리순
+              </button>
+            </div>
+
+            {/* 위치 오류 안내 */}
+            {locationError && <p>{locationError}</p>}
+            {/* 로딩 상태 */}
+            {loading && <p>🍽️ 맛집을 불러오는 중입니다...</p>}
+            {/* 에러 상태 */}
+            {!loading && errorMessage && <p>{errorMessage}</p>}
+
+            {!loading && !errorMessage && sortedPlaces.length > 0 && (
+              <div className="grid gap-5 p-5 overflow-y-auto min-h-[200px] max-h-[calc(100vh-160px)]">
+                {sortedPlaces.map((place) => (
+                  <Card
+                    id={place.id}
+                    key={place.id}
+                    title={place.title}
+                    image={place.image}
+                    description={place.description}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        ) : (
+          <section>
+            <h2 className="text-center">찜 맛집 목록</h2>
+            <p>찜한 맛집이 없습니다.</p>
+          </section>
+        )}
+
+        {/* Kakao Map */}
+        <section className="w-screen">
+          <KakaoMap />
         </section>
       </MainLayout>
     </>

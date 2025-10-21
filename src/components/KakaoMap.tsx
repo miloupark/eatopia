@@ -57,5 +57,7 @@ export default function KakaoMap() {
   }, []);
 
   // 지도 영역으로 사용할 div
-  return <div id="map" style={{ width: "100%", height: "400px" }} />;
+  return (
+    <div id="map" style={{ width: "100%", height: "calc(100vh - 112px)" }} />
+  );
 }
